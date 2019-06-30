@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import jsonPlaceholder from '../apis/jsonPlaceholder';
 
-const ResourceList = ({ resource }) => {
+const useResources = resource => {
   const [resources, setResources] = useState([]);
 
   useEffect(() => {
@@ -10,6 +10,12 @@ const ResourceList = ({ resource }) => {
       setResources(response.data);
     })(resource);
   }, [resource]);
+
+  return resources;
+};
+
+const ResourceList = ({ resource }) => {
+  const resources = useResources(resource);
 
   return (
     <div>
