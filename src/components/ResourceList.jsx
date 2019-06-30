@@ -4,13 +4,11 @@ import jsonPlaceholder from '../apis/jsonPlaceholder';
 const ResourceList = ({ resource }) => {
   const [resources, setResources] = useState([]);
 
-  const fetchResource = async resource => {
-    const response = await jsonPlaceholder.get(`/${resource}`);
-    setResources(response.data);
-  };
-
   useEffect(() => {
-    fetchResource(resource);
+    (async resource => {
+      const response = await jsonPlaceholder.get(`/${resource}`);
+      setResources(response.data);
+    })(resource);
   }, [resource]);
 
   return (
