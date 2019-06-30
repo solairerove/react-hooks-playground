@@ -1,26 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import jsonPlaceholder from '../apis/jsonPlaceholder';
 
-class ResourceList extends React.Component {
-  state = { resources: [] };
+const ResourceList = ({ resource }) => {
+  const [resources, setResources] = useState([]);
 
-  async componentDidMount() {
-    const { resource } = this.props;
+  const fetchResource = async resource => {
     const response = await jsonPlaceholder.get(`/${resource}`);
-    this.setState({ resources: response.data });
-  }
+    setResources(response.data);
+  };
 
-  async componentDidUpdate(prevProps) {
-    const { resource } = this.props;
-    if (prevProps.resource !== resource) {
-      const response = await jsonPlaceholder.get(`/${resource}`);
-      this.setState({ resources: response.data });
-    }
-  }
+  useEffect(() => {
+    fetchResource(resource);
+  }, [resource]);
 
-  render() {
-    return <div>{this.state.resources.length}</div>;
-  }
-}
+  return <div>{resources.length}</div>;
+};
 
 export default ResourceList;
