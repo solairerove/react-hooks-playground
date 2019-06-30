@@ -10,6 +10,14 @@ class ResourceList extends React.Component {
     this.setState({ resources: response.data });
   }
 
+  async componentDidUpdate(prevProps) {
+    const { resource } = this.props;
+    if (prevProps.resource !== resource) {
+      const response = await jsonPlaceholder.get(`/${resource}`);
+      this.setState({ resources: response.data });
+    }
+  }
+
   render() {
     return <div>{this.state.resources.length}</div>;
   }
