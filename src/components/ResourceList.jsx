@@ -1,8 +1,17 @@
 import React from 'react';
+import jsonPlaceholder from '../apis/jsonPlaceholder';
 
 class ResourceList extends React.Component {
+  state = { resources: [] };
+
+  async componentDidMount() {
+    const { resource } = this.props;
+    const response = await jsonPlaceholder.get(`/${resource}`);
+    this.setState({ resources: response.data });
+  }
+
   render() {
-    return <div>{this.props.resource}</div>;
+    return <div>{this.state.resources.length}</div>;
   }
 }
 
