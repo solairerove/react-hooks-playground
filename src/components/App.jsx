@@ -5,24 +5,18 @@ import UserList from './UserList';
 const App = () => {
   const [resource, setResource] = useState('posts');
 
-  const onButtonClick = resource => {
-    setResource(resource);
+  const onButtonClick = (type) => {
+    setResource(type);
   };
 
   return (
     <div className="ui container">
       <UserList />
       <div>
-        <button
-          onClick={() => onButtonClick('posts')}
-          className="ui button primary"
-        >
+        <button type="button" onClick={() => onButtonClick('posts')} className="ui button primary">
           Posts
         </button>
-        <button
-          onClick={() => onButtonClick('todos')}
-          className="ui button primary"
-        >
+        <button type="button" onClick={() => onButtonClick('todos')} className="ui button primary">
           Todos
         </button>
       </div>

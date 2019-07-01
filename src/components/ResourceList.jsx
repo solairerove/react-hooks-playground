@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import useResources from '../hooks/useResources';
 
@@ -13,6 +14,10 @@ const ResourceList = ({ resource }) => {
       </ul>
     </div>
   );
+};
+
+ResourceList.propTypes = {
+  resource: PropTypes.string.isRequired,
 };
 
 export default ResourceList;
